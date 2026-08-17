@@ -1,0 +1,59 @@
+<view class="processing-page">
+  <view class="processing-grid"></view>
+  <view class="scan-line"></view>
+
+  <view wx:if="{{!hasFailed}}" class="processing-content">
+    <view class="processing-head">
+      <text class="processing-index">CASE / BML-0001</text>
+      <view class="scanner">
+        <view class="scanner-core"></view>
+      </view>
+      <view class="processing-title serif">
+        <text>{{role.name}}已经开看，</text>
+        <text>你糊弄的每一句都跑不了。</text>
+      </view>
+      <text class="processing-note">正在逐行挑刺。那些“负责、推动、赋能”，一个都跑不了。</text>
+    </view>
+
+    <view class="progress-block">
+      <view class="progress-meta">
+        <text>ANALYSIS PROGRESS</text>
+        <text>{{progress}}%</text>
+      </view>
+      <view class="progress-track">
+        <view class="progress-value" style="width: {{progress}}%;"></view>
+      </view>
+    </view>
+
+    <view class="stage-list">
+      <view wx:for="{{stages}}" wx:key="title" class="stage-row stage-{{item.state}}">
+        <view class="stage-status">
+          <text wx:if="{{item.state === 'done'}}">✓</text>
+          <text wx:elif="{{item.state === 'active'}}" class="stage-pulse"></text>
+          <text wx:else>{{index + 1}}</text>
+        </view>
+        <view class="stage-copy">
+          <text class="stage-title">{{item.title}}</text>
+          <text class="stage-description">{{item.description}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="failure-content">
+    <view class="failure-code">{{errorCode || 'REVIEW_INTERRUPTED'}} / {{progress}}%</view>
+    <view class="failure-mark">×</view>
+    <view class="failure-title serif">
+      <text>刚才没批成，</text>
+      <text>服务半路掉链子了。</text>
+    </view>
+    <text class="failure-description">{{errorMessage}}</text>
+    <view class="failure-actions">
+      <button wx:if="{{retryable}}" class="retry-button" hover-class="press-flat" bindtap="retry">
+        <text>再批一次</text>
+        <text>→</text>
+      </button>
+      <button class="return-button" hover-class="press-dim" bindtap="returnToEdit">返回修改材料</button>
+    </view>
+  </view>
+</view>

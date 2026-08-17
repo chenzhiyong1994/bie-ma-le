@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 私下报告安全漏洞
+    url: https://github.com/chenzhiyong1994/bie-ma-le/security/advisories/new
+    about: 未修复漏洞、数据泄露或绕过安全边界的问题请勿公开提交。

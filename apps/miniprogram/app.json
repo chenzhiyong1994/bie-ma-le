@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/role/index",
+    "pages/review/index",
+    "pages/processing/index",
+    "pages/report/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#12110f",
+    "navigationBarTitleText": "别骂了",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f2eee5"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

@@ -1,0 +1,54 @@
+<view class="review-page page-shell">
+  <view class="stepper"><view class="step is-active"><text class="step-number">01</text><text>怎么审</text></view><view class="step-line"></view><view class="step is-active"><text class="step-number">02</text><text>交材料</text></view><view class="step-line"></view><view class="step"><text class="step-number">03</text><text>挨批</text></view></view>
+
+  <view class="review-heading">
+    <text class="eyebrow">{{role.englishName}} / CASE INTAKE</text>
+    <view class="review-title serif"><text wx:for="{{role.review.titleLines}}" wx:key="*this">{{item}}</text></view>
+    <text class="review-subtitle">{{role.review.subtitle}}</text>
+    <view class="default-sentence"><text class="default-sentence-label">NO MERCY. NO SMALL TALK.</text><text>拿你真准备交出去的那版来。临时抛光几句，糊弄不了谁。</text></view>
+  </view>
+
+  <view class="form-section">
+    <view class="field-heading"><text class="field-label">评审方式</text><text class="required-mark">必选</text></view>
+    <view class="mode-switch">
+      <button class="mode-option {{reviewMode === 'general' ? 'is-selected' : ''}}" hover-class="press-flat" data-mode="general" bindtap="selectReviewMode"><text class="mode-option-title">{{role.review.generalLabel}}</text><text class="mode-option-note">{{role.review.generalNote}}</text></button>
+      <button class="mode-option {{reviewMode === 'targeted' ? 'is-selected' : ''}}" hover-class="press-flat" data-mode="targeted" bindtap="selectReviewMode"><text class="mode-option-title">{{role.review.targetedLabel}}</text><text class="mode-option-note">{{role.review.targetedNote}}</text></button>
+    </view>
+  </view>
+
+  <view wx:if="{{reviewMode === 'targeted'}}" class="form-section jd-section">
+    <view class="field-heading"><text class="field-label">{{role.review.contextLabel}}</text><text class="required-mark">必填</text></view>
+    <textarea class="jd-textarea" value="{{contextText}}" maxlength="8000" placeholder="{{role.review.contextPlaceholder}}" placeholder-class="field-placeholder" bindinput="onContextInput"></textarea>
+    <view class="textarea-footer"><text>至少 20 字</text><text>{{contextLength}} / 8000</text></view>
+  </view>
+
+  <view class="form-section resume-section">
+    <view class="field-heading"><text class="field-label">{{role.review.materialLabel}}</text><text class="required-mark">必填</text></view>
+    <view class="material-switch"><button class="material-option {{materialMode === 'file' ? 'is-selected' : ''}}" hover-class="press-flat" data-mode="file" bindtap="selectMaterialMode"><text>上传文件</text></button><button class="material-option {{materialMode === 'text' ? 'is-selected' : ''}}" hover-class="press-flat" data-mode="text" bindtap="selectMaterialMode"><text>粘贴文本</text></button></view>
+
+    <view wx:if="{{materialMode === 'text'}}">
+      <textarea class="resume-textarea" value="{{materialText}}" maxlength="20000" placeholder="{{role.review.materialPlaceholder}}" placeholder-class="field-placeholder" bindinput="onMaterialInput"></textarea>
+      <view class="textarea-footer"><text>至少 80 字</text><text>{{materialLength}} / 20000</text></view>
+    </view>
+
+    <view wx:else class="file-panel">
+      <button wx:if="{{fileStatus === 'idle'}}" class="file-drop" hover-class="press-flat" bindtap="chooseMaterialFile"><view class="upload-symbol">↑</view><text class="file-drop-title">选择评审文件</text><text class="file-drop-note">PDF / Word（.docx），最大 8MB</text></button>
+      <view wx:elif="{{fileStatus === 'parsing'}}" class="file-state"><view class="file-spinner"></view><text class="file-state-title">正在拆解 {{fileName}}</text><text class="file-state-note">只提取文字，不保存原文件</text></view>
+      <view wx:elif="{{fileStatus === 'ready'}}" class="file-ready">
+        <view class="file-ready-head"><view class="file-type">{{fileType}}</view><view class="file-ready-title"><text class="file-ready-kicker">FILE READY</text><text>文件读完了</text></view><text class="file-check">✓</text></view>
+        <view class="file-facts">
+          <view class="file-fact"><text class="file-fact-label">文件名称</text><text class="file-name">{{fileName}}</text></view>
+          <view class="file-fact"><text class="file-fact-label">文件大小</text><text class="file-fact-value">{{fileSizeLabel}}</text></view>
+          <view class="file-fact"><text class="file-fact-label">文件格式</text><text class="file-fact-value">{{fileType}}</text></view>
+        </view>
+        <text wx:for="{{fileWarnings}}" wx:key="*this" class="file-warning">{{item}}</text>
+        <view class="file-actions"><button hover-class="press-flat" bindtap="chooseMaterialFile">重新选择</button><button hover-class="press-flat" bindtap="removeFile">移除</button></view>
+      </view>
+      <view wx:else class="file-error"><text class="file-error-title">这个文件没读出来</text><text class="file-error-copy">{{fileError}}</text><view class="file-actions"><button hover-class="press-flat" bindtap="chooseMaterialFile">重新选择</button><button hover-class="press-flat" data-mode="text" bindtap="selectMaterialMode">改用文本</button></view></view>
+    </view>
+  </view>
+
+  <view class="privacy-notice"><view class="notice-stamp">CLOUD</view><view class="notice-copy"><text class="notice-title">文件只临时用一下，不留底</text><text class="notice-description">原文件上传后只用来提取文字，读完立即删除。正文只用于这次评审，不进数据库，也不写进日志。</text></view></view>
+  <button class="consent-row {{consentAccepted ? 'is-checked' : ''}}" hover-class="press-dim" bindtap="toggleConsent"><view class="consent-box">{{consentAccepted ? '✓' : ''}}</view><text>我知道这份材料会在本小程序的微信云开发环境中处理</text></button>
+  <button class="primary-button submit-button" hover-class="press-hard" bindtap="submitReview"><text>交上去，开批</text><text class="button-arrow">→</text></button>
+</view>

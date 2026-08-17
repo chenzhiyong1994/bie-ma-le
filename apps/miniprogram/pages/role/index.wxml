@@ -1,0 +1,87 @@
+<view class="role-page">
+  <view class="role-hero role-theme-{{role.number}}">
+    <view class="role-security-bar"></view>
+    <view class="dossier-heading">
+      <view class="dossier-code">
+        <text>BML · {{role.number}}</text>
+        <view class="dossier-status"><view class="status-light"></view><text>ACTIVE REVIEWER</text></view>
+      </view>
+      <text class="role-english">{{role.englishName}}</text>
+    </view>
+
+    <view class="role-profile">
+      <view class="role-portrait-frame">
+        <image class="role-portrait" src="/assets/roles/{{role.id}}.jpg" mode="aspectFill" />
+        <view class="portrait-symbol serif">{{role.symbol}}</view>
+      </view>
+      <view class="role-profile-copy">
+        <text class="profile-label">AUTHORIZED REVIEWER</text>
+        <view class="role-name serif">{{role.name}}</view>
+        <text class="role-title">{{role.title}}</text>
+        <view class="role-experience">
+          <view class="experience-mark"></view>
+          <text>{{role.years}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="declaration">
+      <view class="declaration-heading">
+        <text>INTERNAL REVIEW NOTE</text>
+        <text>CONFIDENTIAL / 01</text>
+      </view>
+      <text class="declaration-copy serif">“{{role.declaration}}”</text>
+    </view>
+    <text class="role-hero-watermark serif">{{role.symbol}}</text>
+  </view>
+
+  <view class="role-content">
+    <view class="scope-strip">
+      <text wx:for="{{role.scope}}" wx:key="*this" class="scope-item">{{item}}</text>
+    </view>
+
+    <view class="content-section">
+      <text class="eyebrow">HOW YOU WILL BE TESTED</text>
+      <view class="section-heading serif">他会挑你什么毛病</view>
+      <view class="dimension-list">
+        <view wx:for="{{role.dimensions}}" wx:key="index" class="dimension-row">
+          <text class="dimension-index">{{item.index}}</text>
+          <view class="dimension-copy">
+            <text class="dimension-name">{{item.name}}</text>
+            <text class="dimension-description">{{item.description}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="content-section requirements-section">
+      <text class="eyebrow">BRING YOUR EVIDENCE</text>
+      <view class="section-heading serif">别空着手来</view>
+      <view class="requirements-card paper-card">
+        <view wx:for="{{role.requirements}}" wx:key="*this" class="requirement-row">
+          <view class="check-box">{{index + 1}}</view>
+          <text>{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="sample-stack">
+      <view class="sample-verdict is-bad">
+        <text class="sample-label">BAD MATERIAL / 当场打回</text>
+        <text class="sample-copy serif">“{{badVerdict}}”</text>
+      </view>
+      <view class="sample-verdict is-good">
+        <text class="sample-label">SOLID MATERIAL / 有货就认</text>
+        <text class="sample-copy serif">“{{goodVerdict}}”</text>
+      </view>
+      <text class="sample-note">写得烂，骂得明白；真有硬货，也不会硬挑。领导刻薄，不代表眼瞎。</text>
+    </view>
+  </view>
+
+  <view class="sticky-action safe-bottom">
+    <button class="primary-button" hover-class="press-hard" bindtap="startReview">
+      <text>拿去给他挑刺</text>
+      <text class="button-arrow">→</text>
+    </button>
+  </view>
+</view>

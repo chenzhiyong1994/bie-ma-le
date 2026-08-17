@@ -1,0 +1,277 @@
+page {
+  min-height: 100%;
+  color: #171511;
+  background-color: #f2eee5;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(23, 21, 17, 0.02) 0,
+    rgba(23, 21, 17, 0.02) 2rpx,
+    transparent 2rpx,
+    transparent 8rpx
+  );
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 28rpx;
+}
+
+view,
+text,
+button,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  border-radius: 0;
+  background: transparent;
+}
+
+button::after {
+  border: 0;
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 32rpx 32rpx calc(48rpx + env(safe-area-inset-bottom));
+}
+
+.eyebrow {
+  color: #7d766a;
+  font-size: 20rpx;
+  font-weight: 700;
+  letter-spacing: 5rpx;
+  text-transform: uppercase;
+}
+
+.serif {
+  font-family: "Songti SC", "STSong", "SimSun", serif;
+}
+
+/* ---------- 按钮体系 ---------- */
+
+.primary-button,
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 108rpx;
+  padding: 0 32rpx;
+  font-size: 29rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+
+.primary-button {
+  color: #fffaf0;
+  background: #d83227;
+  box-shadow: 8rpx 8rpx 0 #171511;
+}
+
+.primary-button[disabled] {
+  color: #bdb5a7;
+  background: #dfd9cd;
+  box-shadow: 6rpx 6rpx 0 #bdb5a7;
+}
+
+.secondary-button {
+  color: #171511;
+  border: 2rpx solid #171511;
+  background: #faf6ec;
+  box-shadow: 6rpx 6rpx 0 rgba(23, 21, 17, 0.12);
+}
+
+.button-arrow {
+  font-size: 40rpx;
+  font-weight: 400;
+  transition: transform 0.14s ease;
+}
+
+/* ---------- 按压反馈（hover-class 挂载） ---------- */
+
+/* 硬阴影块：按下时位移 + 阴影收敛，像敲章 */
+.press-hard {
+  transform: translate(5rpx, 5rpx);
+  box-shadow: 3rpx 3rpx 0 #171511;
+}
+
+.press-hard .button-arrow {
+  transform: translateX(6rpx);
+}
+
+/* 平面描边控件：轻微下沉 */
+.press-flat {
+  transform: translate(2rpx, 2rpx);
+  opacity: 0.86;
+}
+
+/* 文字型链接：压暗 */
+.press-dim {
+  opacity: 0.55;
+}
+
+/* 卡片：下沉 + 阴影收敛 */
+.card-press {
+  transform: translate(5rpx, 5rpx);
+  box-shadow: 3rpx 3rpx 0 rgba(23, 21, 17, 0.14);
+}
+
+/* ---------- 卡片与通用件 ---------- */
+
+.paper-card {
+  border: 2rpx solid #171511;
+  background: #faf6ec;
+  box-shadow: 8rpx 8rpx 0 rgba(23, 21, 17, 0.1);
+}
+
+.section-heading {
+  margin-top: 12rpx;
+  font-size: 44rpx;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -1rpx;
+}
+
+.hairline {
+  height: 2rpx;
+  background: #171511;
+  opacity: 0.16;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ---------- 分享海报预览 ---------- */
+
+.share-poster-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32rpx;
+  background: rgba(10, 9, 8, 0.88);
+  animation: fade-in 0.2s ease-out;
+}
+
+.share-poster-dialog {
+  width: 100%;
+  max-height: 94vh;
+  padding: 28rpx;
+  overflow: auto;
+  background: #f2eee5;
+  box-shadow: 10rpx 12rpx 0 rgba(216, 50, 39, 0.55);
+}
+
+.share-poster-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.share-poster-kicker,
+.share-poster-title {
+  display: block;
+}
+
+.share-poster-kicker {
+  color: #9a2a23;
+  font-size: 17rpx;
+  font-weight: 700;
+  letter-spacing: 3rpx;
+}
+
+.share-poster-title {
+  margin-top: 10rpx;
+  font-size: 35rpx;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.share-poster-close {
+  flex: none;
+  width: 56rpx;
+  height: 56rpx;
+  color: #171511;
+  font-size: 44rpx;
+  font-weight: 300;
+  line-height: 52rpx;
+  border: 2rpx solid #171511;
+}
+
+.share-poster-preview-shell {
+  height: 720rpx;
+  margin-top: 24rpx;
+  padding: 18rpx;
+  background: #171511;
+}
+
+.share-poster-preview {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.share-poster-tip {
+  display: block;
+  margin: 22rpx 2rpx 0;
+  color: #6f685d;
+  font-size: 20rpx;
+  line-height: 1.65;
+}
+
+.share-poster-save {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 94rpx;
+  margin-top: 22rpx;
+  padding: 0 28rpx;
+  color: #fffaf0;
+  font-size: 26rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  background: #d83227;
+  box-shadow: 7rpx 7rpx 0 #171511;
+}
+
+.share-poster-canvas {
+  position: fixed;
+  top: 0;
+  left: -2000px;
+  width: 750px;
+  height: 1000px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* ---------- 共享动效 ---------- */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(26rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,449 @@
+.role-page {
+  min-height: 100vh;
+  padding-bottom: 190rpx;
+}
+
+/* ---------- 角色英雄区 ---------- */
+
+.role-hero {
+  position: relative;
+  padding: 38rpx 32rpx 46rpx;
+  overflow: hidden;
+  color: #fffaf0;
+  background: #171511;
+}
+
+.role-hero::after {
+  content: "";
+  position: absolute;
+  top: -90rpx;
+  right: -90rpx;
+  width: 390rpx;
+  height: 390rpx;
+  opacity: 0.07;
+  background-image:
+    linear-gradient(rgba(255, 250, 240, 0.8) 2rpx, transparent 2rpx),
+    linear-gradient(90deg, rgba(255, 250, 240, 0.8) 2rpx, transparent 2rpx);
+  background-size: 44rpx 44rpx;
+  transform: rotate(9deg);
+}
+
+.role-security-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 8rpx;
+  background: #d83227;
+}
+
+.role-theme-002 .role-security-bar {
+  background: #416e86;
+}
+
+.role-theme-003 .role-security-bar {
+  background: #8ca083;
+}
+
+.role-theme-004 .role-security-bar {
+  background: #e78a71;
+}
+
+.dossier-heading {
+  position: relative;
+  z-index: 2;
+}
+
+.dossier-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #a29b90;
+  font-family: "Courier New", monospace;
+  font-size: 17rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+.dossier-status {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  color: #c8c1b5;
+  font-size: 15rpx;
+  letter-spacing: 1rpx;
+}
+
+.status-light {
+  width: 9rpx;
+  height: 9rpx;
+  border-radius: 50%;
+  background: #68a879;
+  box-shadow: 0 0 0 5rpx rgba(104, 168, 121, 0.13);
+}
+
+.role-english {
+  display: block;
+  margin-top: 12rpx;
+  color: #d83227;
+  font-size: 17rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+}
+
+.role-theme-002 .role-english {
+  color: #70a0b7;
+}
+
+.role-theme-003 .role-english {
+  color: #a9bca1;
+}
+
+.role-theme-004 .role-english {
+  color: #f0a38e;
+}
+
+.role-profile {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: stretch;
+  gap: 26rpx;
+  margin-top: 30rpx;
+  animation: rise-in 0.5s ease-out 0.08s backwards;
+}
+
+.role-portrait-frame {
+  position: relative;
+  flex: none;
+  width: 196rpx;
+  height: 226rpx;
+  overflow: hidden;
+  border: 2rpx solid #fffaf0;
+  background: #25211c;
+  box-shadow: 8rpx 8rpx 0 rgba(216, 50, 39, 0.42);
+}
+
+.role-theme-002 .role-portrait-frame {
+  box-shadow: 8rpx 8rpx 0 rgba(65, 110, 134, 0.55);
+}
+
+.role-theme-003 .role-portrait-frame {
+  box-shadow: 8rpx 8rpx 0 rgba(140, 160, 131, 0.5);
+}
+
+.role-theme-004 .role-portrait-frame {
+  border-color: #f4c6b8;
+  box-shadow: 8rpx 8rpx 0 rgba(231, 138, 113, 0.45);
+}
+
+.role-portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait-symbol {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62rpx;
+  height: 62rpx;
+  color: #fffaf0;
+  font-size: 34rpx;
+  font-weight: 700;
+  background: #171511;
+}
+
+.role-theme-004 .portrait-symbol {
+  color: #4d1714;
+  background: #f4c6b8;
+}
+
+.role-profile-copy {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-label {
+  color: #8f887d;
+  font-family: "Courier New", monospace;
+  font-size: 15rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+.role-name {
+  margin-top: 16rpx;
+  font-size: 54rpx;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -2rpx;
+}
+
+.role-title {
+  display: block;
+  margin-top: 16rpx;
+  color: #c7c0b4;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.role-experience {
+  display: flex;
+  align-items: center;
+  gap: 11rpx;
+  margin-top: 18rpx;
+  color: #9e968a;
+  font-size: 19rpx;
+  line-height: 1.35;
+}
+
+.experience-mark {
+  flex: none;
+  width: 18rpx;
+  height: 4rpx;
+  background: #d83227;
+}
+
+.role-theme-002 .experience-mark {
+  background: #70a0b7;
+}
+
+.role-theme-003 .experience-mark {
+  background: #a9bca1;
+}
+
+.role-theme-004 .experience-mark {
+  background: #f0a38e;
+}
+
+.declaration {
+  position: relative;
+  z-index: 2;
+  margin-top: 30rpx;
+  padding: 20rpx 22rpx 24rpx;
+  border-top: 2rpx solid rgba(255, 250, 240, 0.22);
+  border-left: 6rpx solid #d83227;
+  background: rgba(255, 250, 240, 0.055);
+  animation: rise-in 0.5s ease-out 0.2s backwards;
+}
+
+.role-theme-002 .declaration {
+  border-left-color: #70a0b7;
+}
+
+.role-theme-003 .declaration {
+  border-left-color: #a9bca1;
+}
+
+.role-theme-004 .declaration {
+  border-left-color: #f0a38e;
+}
+
+.declaration-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #8f887d;
+  font-family: "Courier New", monospace;
+  font-size: 14rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+.declaration-copy {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 29rpx;
+  font-weight: 600;
+  line-height: 1.58;
+}
+
+.role-hero-watermark {
+  position: absolute;
+  right: -18rpx;
+  bottom: -76rpx;
+  z-index: 0;
+  color: rgba(255, 250, 240, 0.035);
+  font-size: 300rpx;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---------- 内容区 ---------- */
+
+.role-content {
+  padding: 0 32rpx 40rpx;
+}
+
+.scope-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 -32rpx 64rpx;
+  border-top: 2rpx solid rgba(23, 21, 17, 0.5);
+  border-bottom: 2rpx solid #171511;
+  background: #e6dfd2;
+}
+
+.scope-item {
+  padding: 24rpx 5rpx;
+  font-size: 21rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  text-align: center;
+  border-right: 2rpx solid rgba(23, 21, 17, 0.18);
+}
+
+.scope-item:last-child {
+  border-right: 0;
+}
+
+.content-section {
+  margin-bottom: 70rpx;
+}
+
+.dimension-list {
+  margin-top: 34rpx;
+  border-top: 2rpx solid #171511;
+}
+
+.dimension-row {
+  display: flex;
+  gap: 26rpx;
+  padding: 30rpx 0;
+  border-bottom: 2rpx solid rgba(23, 21, 17, 0.18);
+}
+
+.dimension-index {
+  color: #d83227;
+  font-family: Georgia, serif;
+  font-size: 23rpx;
+  font-weight: 700;
+}
+
+.dimension-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.dimension-name {
+  font-size: 29rpx;
+  font-weight: 700;
+}
+
+.dimension-description {
+  color: #6f685c;
+  font-size: 23rpx;
+  line-height: 1.6;
+}
+
+.requirements-section {
+  margin-bottom: 46rpx;
+}
+
+.requirements-card {
+  margin-top: 32rpx;
+  padding: 10rpx 28rpx;
+}
+
+.requirement-row {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  padding: 25rpx 0;
+  font-size: 25rpx;
+  line-height: 1.5;
+  border-bottom: 2rpx solid rgba(23, 21, 17, 0.13);
+}
+
+.requirement-row:last-child {
+  border-bottom: 0;
+}
+
+.check-box {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44rpx;
+  height: 44rpx;
+  color: #fffaf0;
+  font-family: Georgia, serif;
+  font-size: 20rpx;
+  background: #171511;
+}
+
+/* ---------- 样板宣判 ---------- */
+
+.sample-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.sample-verdict {
+  padding: 32rpx;
+  color: #fffaf0;
+  background: #8f251e;
+  box-shadow: 7rpx 7rpx 0 rgba(23, 21, 17, 0.15);
+}
+
+.sample-verdict.is-good {
+  color: #172119;
+  background: #d2ddd0;
+}
+
+.is-good .sample-label {
+  color: #315b3c;
+}
+
+.is-good .sample-copy {
+  color: #172119;
+}
+
+.sample-label {
+  display: block;
+  font-size: 19rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  opacity: 0.85;
+}
+
+.sample-copy {
+  display: block;
+  margin-top: 24rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.sample-note {
+  display: block;
+  padding: 0 4rpx;
+  color: #716a5f;
+  font-size: 21rpx;
+  line-height: 1.65;
+}
+
+/* ---------- 底部吸附动作 ---------- */
+
+.sticky-action {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 24rpx 32rpx;
+  border-top: 2rpx solid rgba(23, 21, 17, 0.12);
+  background: rgba(242, 238, 229, 0.97);
+  box-shadow: 0 -8rpx 24rpx rgba(23, 21, 17, 0.06);
+}

@@ -1,0 +1,341 @@
+page {
+  background: #171511;
+}
+
+.processing-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 48rpx 38rpx calc(46rpx + env(safe-area-inset-bottom));
+  overflow: hidden;
+  color: #fffaf0;
+  background: #171511;
+}
+
+.processing-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image:
+    linear-gradient(rgba(255, 250, 240, 0.45) 2rpx, transparent 2rpx),
+    linear-gradient(90deg, rgba(255, 250, 240, 0.45) 2rpx, transparent 2rpx);
+  background-size: 64rpx 64rpx;
+}
+
+.scan-line {
+  position: absolute;
+  top: -18%;
+  right: 0;
+  left: 0;
+  height: 180rpx;
+  background: linear-gradient(180deg, rgba(255, 250, 240, 0), rgba(255, 250, 240, 0.05), rgba(255, 250, 240, 0));
+  animation: scan 5.5s linear infinite;
+  pointer-events: none;
+}
+
+.processing-content,
+.failure-content {
+  position: relative;
+  z-index: 1;
+}
+
+.processing-index,
+.failure-code {
+  color: #8f887e;
+  font-size: 19rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+}
+
+/* ---------- 扫描仪 ---------- */
+
+.scanner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132rpx;
+  height: 132rpx;
+  margin-top: 54rpx;
+  border: 2rpx solid rgba(255, 250, 240, 0.22);
+  border-radius: 50%;
+}
+
+.scanner::before {
+  content: "";
+  position: absolute;
+  inset: 13rpx;
+  border: 2rpx dashed rgba(216, 50, 39, 0.85);
+  border-radius: 50%;
+  animation: scanner-rotate 3.2s linear infinite;
+}
+
+.scanner::after {
+  content: "";
+  position: absolute;
+  inset: -2rpx;
+  border: 3rpx solid transparent;
+  border-top-color: #d83227;
+  border-right-color: #d83227;
+  border-radius: 50%;
+  animation: scanner-rotate 1.5s linear infinite;
+}
+
+.scanner-core {
+  width: 22rpx;
+  height: 22rpx;
+  background: #d83227;
+  animation: core-glow 1.6s ease-in-out infinite;
+}
+
+.processing-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 48rpx;
+  font-size: 56rpx;
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -2rpx;
+  animation: rise-in 0.5s ease-out 0.1s backwards;
+}
+
+.processing-note {
+  display: block;
+  margin-top: 26rpx;
+  color: #999287;
+  font-size: 21rpx;
+  line-height: 1.65;
+  animation: rise-in 0.5s ease-out 0.2s backwards;
+}
+
+/* ---------- 进度 ---------- */
+
+.progress-block {
+  margin-top: 58rpx;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #b6afa4;
+  font-family: Georgia, serif;
+  font-size: 19rpx;
+  letter-spacing: 2rpx;
+}
+
+.progress-track {
+  height: 10rpx;
+  margin-top: 16rpx;
+  overflow: hidden;
+  background: #3e3a34;
+}
+
+.progress-value {
+  position: relative;
+  height: 100%;
+  background: #d83227;
+  box-shadow: 4rpx 0 14rpx rgba(216, 50, 39, 0.55);
+  transition: width 0.45s ease;
+}
+
+/* ---------- 阶段列表 ---------- */
+
+.stage-list {
+  margin-top: 46rpx;
+  border-top: 2rpx solid #3b3731;
+}
+
+.stage-row {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  min-height: 106rpx;
+  color: #625d55;
+  border-bottom: 2rpx solid #3b3731;
+  transition: color 0.3s ease;
+  animation: rise-in 0.45s ease-out backwards;
+}
+
+.stage-row:nth-child(1) { animation-delay: 0.25s; }
+.stage-row:nth-child(2) { animation-delay: 0.33s; }
+.stage-row:nth-child(3) { animation-delay: 0.41s; }
+.stage-row:nth-child(4) { animation-delay: 0.49s; }
+.stage-row:nth-child(5) { animation-delay: 0.57s; }
+
+.stage-active,
+.stage-done {
+  color: #fffaf0;
+}
+
+.stage-failed {
+  color: #d83227;
+}
+
+.stage-status {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 42rpx;
+  height: 42rpx;
+  font-family: Georgia, serif;
+  font-size: 20rpx;
+  border: 2rpx solid currentColor;
+  border-radius: 50%;
+}
+
+.stage-done .stage-status {
+  color: #171511;
+  border-color: #fffaf0;
+  background: #fffaf0;
+}
+
+.stage-active .stage-status {
+  color: #d83227;
+  border-color: #d83227;
+}
+
+.stage-pulse {
+  width: 13rpx;
+  height: 13rpx;
+  border-radius: 50%;
+  background: #d83227;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.stage-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.stage-title {
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.stage-description {
+  color: #777168;
+  font-size: 20rpx;
+  line-height: 1.5;
+}
+
+.stage-active .stage-description,
+.stage-done .stage-description {
+  color: #9f988d;
+}
+
+/* ---------- 失败态 ---------- */
+
+.failure-content {
+  padding-top: 22rpx;
+}
+
+.failure-code {
+  color: #d83227;
+  overflow-wrap: anywhere;
+}
+
+.failure-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 128rpx;
+  height: 128rpx;
+  margin-top: 92rpx;
+  color: #d83227;
+  font-family: Georgia, serif;
+  font-size: 95rpx;
+  line-height: 1;
+  border: 4rpx solid #d83227;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  animation: stamp-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) 0.15s backwards;
+}
+
+.failure-mark::after {
+  content: "";
+  position: absolute;
+  inset: 9rpx;
+  border: 2rpx solid rgba(216, 50, 39, 0.45);
+  border-radius: 50%;
+}
+
+.failure-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 54rpx;
+  font-size: 54rpx;
+  font-weight: 700;
+  line-height: 1.26;
+}
+
+.failure-description {
+  display: block;
+  margin-top: 30rpx;
+  color: #aaa398;
+  font-size: 24rpx;
+  line-height: 1.7;
+}
+
+.failure-actions {
+  margin-top: 72rpx;
+}
+
+.retry-button,
+.return-button {
+  width: 100%;
+  min-height: 102rpx;
+  font-size: 25rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  transition: transform 0.14s ease, opacity 0.14s ease;
+}
+
+.retry-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28rpx;
+  color: #fffaf0;
+  background: #d83227;
+  box-shadow: 6rpx 6rpx 0 rgba(255, 250, 240, 0.18);
+}
+
+.return-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18rpx;
+  padding: 0;
+  color: #aaa398;
+  line-height: 1;
+  border: 2rpx solid #4a453e;
+}
+
+/* ---------- 动效 ---------- */
+
+@keyframes scanner-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes core-glow {
+  0%, 100% { box-shadow: 0 0 0 10rpx rgba(216, 50, 39, 0.14); }
+  50% { box-shadow: 0 0 0 16rpx rgba(216, 50, 39, 0.07); }
+}
+
+@keyframes scan {
+  to { transform: translateY(130vh); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.75); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes stamp-in {
+  from { opacity: 0; transform: rotate(14deg) scale(1.5); }
+  to { opacity: 1; transform: rotate(-8deg) scale(1); }
+}

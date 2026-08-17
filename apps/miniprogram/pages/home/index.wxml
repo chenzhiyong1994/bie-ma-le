@@ -1,0 +1,94 @@
+<view class="home-page">
+  <view class="hero">
+    <view class="hero-grid"></view>
+    <view class="hero-watermark serif">审</view>
+    <view class="hero-index">BML / FOUR TYRANTS</view>
+    <view class="hero-copy">
+      <text class="hero-kicker">别找夸 · 来挨批</text>
+      <view class="hero-title serif">
+        <text>这破材料，</text>
+        <text class="hero-title-accent">也好意思往外发？</text>
+      </view>
+      <text class="hero-description">朋友怕伤感情，只会说“挺好的”。暴君不怕：哪句是废话，哪段在糊弄，当场给你挑明。</text>
+    </view>
+    <view class="hero-seal"><text>就这？</text><text>敢发？</text></view>
+  </view>
+
+  <view class="role-zone">
+    <view class="zone-heading">
+      <view><text class="eyebrow">IDENTITY DIRECTORY</text><view class="section-heading serif">暴君身份档案</view></view>
+      <view class="zone-status"><view class="status-light"></view><text>04 / ON DUTY</text></view>
+    </view>
+
+    <view class="identity-grid">
+      <view
+        wx:for="{{roles}}"
+        wx:key="id"
+        class="identity-card identity-card-{{index}}"
+        hover-class="identity-card-press"
+        data-role-id="{{item.id}}"
+        bindtap="goToRole"
+        aria-role="button"
+        aria-label="查看{{item.name}}档案"
+      >
+        <view class="identity-security-line"></view>
+        <view class="identity-card-body">
+          <view class="identity-photo-frame">
+            <image class="identity-photo" src="/assets/roles/{{item.id}}.jpg" mode="aspectFill" />
+            <view class="identity-symbol serif">{{item.symbol}}</view>
+          </view>
+          <view class="identity-info">
+            <view class="identity-code-row">
+              <text class="identity-code">BML · {{item.number}}</text>
+              <view class="identity-chip"><view></view><view></view><view></view></view>
+            </view>
+            <text class="identity-name serif">{{item.name}}</text>
+            <text class="identity-title">{{item.title}}</text>
+            <view class="identity-tags">
+              <text>{{item.category}}</text>
+              <text class="identity-clearance">审稿权限</text>
+            </view>
+          </view>
+        </view>
+        <view class="identity-quote">
+          <text class="identity-quote-label">暴君原话</text>
+          <text class="identity-quote-copy">“{{item.declaration}}”</text>
+        </view>
+        <view class="identity-card-footer">
+          <text class="identity-record">{{item.years}}</text>
+          <view class="identity-enter"><text>调取档案</text><text class="identity-arrow">↗</text></view>
+        </view>
+        <view class="identity-corner-mark"></view>
+      </view>
+    </view>
+
+    <button
+      class="home-share-button {{sharePosterGenerating ? 'home-share-button-disabled' : ''}}"
+      hover-class="home-share-button-press"
+      bindtap="generateAllTyrantsPoster"
+      disabled="{{sharePosterGenerating}}"
+      aria-label="生成全员分享图"
+    >
+      <text>{{sharePosterGenerating ? '生成中…' : '分享'}}</text>
+      <text class="home-share-arrow">↗</text>
+    </button>
+
+    <view class="final-note"><view class="final-dot"></view><text>拿最终稿来。半成品挨骂都嫌浪费时间。</text></view>
+  </view>
+</view>
+
+<view wx:if="{{sharePosterVisible}}" class="share-poster-overlay" catchtouchmove="preventPosterScroll">
+  <view class="share-poster-dialog">
+    <view class="share-poster-head home-share-poster-head">
+      <text class="share-poster-kicker">ALL TYRANTS / READY</text>
+      <view class="share-poster-close home-share-poster-close" bindtap="closeSharePoster" aria-role="button" aria-label="关闭分享海报">×</view>
+    </view>
+    <view class="share-poster-preview-shell">
+      <image class="share-poster-preview" src="{{sharePosterPath}}" mode="aspectFit" />
+    </view>
+    <text class="share-poster-tip">先保存图片，再从相册发到朋友圈。好友长按小程序码就能进来选暴君。</text>
+    <button class="share-poster-save" hover-class="press-hard" bindtap="saveSharePoster"><text>保存到相册</text><text class="button-arrow">↓</text></button>
+  </view>
+</view>
+
+<canvas type="2d" id="homeSharePosterCanvas" class="share-poster-canvas"></canvas>

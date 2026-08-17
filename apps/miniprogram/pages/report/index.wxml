@@ -1,0 +1,74 @@
+<view wx:if="{{hasReport}}" class="report-page band-{{report.qualityBand}}">
+  <view class="report-cover">
+    <view class="report-meta"><text>{{report.id}}</text><text>{{report.createdAt}}</text></view>
+    <view class="report-title serif"><text>暴君</text><text>批示</text></view>
+    <view class="score-stamp"><text class="score-number">{{report.overallScore}}</text><text class="score-label">/ 100</text><text class="quality-label">{{quality.label}}</text></view>
+    <view class="target-line"><text>{{role.name}}</text><text>{{context.modeLabel || '整体评审'}}</text></view>
+  </view>
+
+  <view class="report-body">
+    <view class="result-banner"><text class="result-banner-label">批完了</text><text>问题比你以为的多。看看哪句话先遭殃。</text></view>
+
+    <view class="verdict-section"><text class="eyebrow">TYRANT'S ORDER / {{quality.label}}</text><view class="verdict-title serif">{{report.verdict}}</view><text class="verdict-note">{{report.verdictNote}}</text></view>
+
+    <view class="score-section">
+      <view class="report-section-heading"><view><text class="eyebrow">DIAGNOSIS</text><view class="section-heading serif">先看看问题有多大</view></view><text class="section-code">01</text></view>
+      <view class="score-list paper-card"><view wx:for="{{report.scores}}" wx:key="dimension" class="score-row"><view class="score-row-top"><text class="score-dimension">{{item.dimension}}</text><text class="score-value">{{item.score}}</text></view><view class="score-bar"><view class="score-bar-value" style="width: {{item.score}}%;"></view></view><text class="score-note">{{item.note}}</text></view></view>
+    </view>
+
+    <view wx:if="{{report.strengths.length}}" class="strengths-section">
+      <view class="report-section-heading"><view><text class="eyebrow">WHAT PASSED</text><view class="section-heading serif">少数没写废的地方</view></view><text class="section-code">02</text></view>
+      <view class="strength-list wide-rail">
+        <view wx:for="{{report.strengths}}" wx:key="title" class="strength-card">
+          <view class="strength-index">PROOF / 0{{index + 1}}</view><view class="strength-title serif">{{item.title}}</view>
+          <view class="evidence-stack strength-evidence"><view wx:for="{{item.evidenceSamples}}" wx:key="*this" class="evidence-row"><text class="evidence-bullet">✓</text><text class="evidence-copy">“{{item}}”</text></view></view>
+          <text class="strength-analysis">{{item.analysis}}</text><view class="strength-value"><text class="detail-label">为什么这句能留</text><text>{{item.value}}</text></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="issues-section">
+      <view class="report-section-heading"><view><text class="eyebrow">ISSUES + ORDERS</text><view class="section-heading serif">{{report.qualityBand === 'ready' ? '非要挑，还能挑什么' : '问题在哪，赶紧怎么改'}}</view></view><text class="section-code">{{report.strengths.length ? '03' : '02'}}</text></view>
+
+      <view wx:if="{{report.issues.length}}" class="issue-list wide-rail">
+        <view wx:for="{{report.issues}}" wx:for-item="issue" wx:for-index="issueIndex" wx:key="title" class="issue-card">
+          <view class="issue-summary" data-index="{{issueIndex}}" bindtap="toggleIssue" hover-class="issue-summary-active">
+            <view class="issue-summary-top"><view class="issue-priority"><text class="severity severity-{{issue.severity}}">{{issue.severity}}</text><text class="issue-order">ISSUE / 0{{issueIndex + 1}}</text></view><view class="hit-count"><text>{{issue.evidenceKind === 'missing' ? '证据缺口' : '点名原文'}}</text><text class="hit-number">{{issue.evidenceSamples.length}}</text></view></view>
+            <view class="issue-title serif">{{issue.title}}</view>
+            <view class="issue-evidence"><text class="issue-mini-label">原文证据</text><view class="evidence-stack"><view wx:for="{{issue.evidenceRows}}" wx:for-item="evidenceRow" wx:key="number" wx:if="{{expandedIssue === issueIndex || evidenceRow.isPreview}}" class="evidence-row"><text class="evidence-bullet">{{evidenceRow.number}}</text><text class="evidence-copy">{{issue.evidenceKind === 'missing' ? evidenceRow.evidence : '“' + evidenceRow.evidence + '”'}}</text></view><text wx:if="{{expandedIssue !== issueIndex && issue.hasMoreEvidence}}" class="more-evidence">另有 {{issue.remainingEvidenceCount}} 条同类原文</text></view></view>
+            <view class="diagnosis-block"><text class="issue-mini-label">领导结论</text><text class="issue-diagnosis">{{issue.diagnosis}}</text></view>
+            <view class="expand-control"><text>{{expandedIssue === issueIndex ? '收起详细改法' : '展开改法和通过标准'}}</text><text class="expand-symbol">{{expandedIssue === issueIndex ? '−' : '+'}}</text></view>
+          </view>
+          <view wx:if="{{expandedIssue === issueIndex}}" class="issue-detail">
+            <view class="detail-block impact-block"><view class="detail-step-head"><text class="detail-step-number">01</text><text class="detail-step-type">WHY IT HURTS</text></view><text class="detail-label">这破写法坑在哪</text><text class="detail-copy">{{issue.impact}}</text></view>
+            <view class="detail-block suggestion-block"><view class="detail-step-head"><text class="detail-step-number">02</text><text class="detail-step-type">DO THIS</text></view><text class="detail-label">别废话，照着改</text><text class="detail-copy">{{issue.suggestion}}</text></view>
+            <view class="detail-block acceptance-block"><view class="detail-step-head"><text class="detail-step-number">03</text><text class="detail-step-type">PASS LINE</text></view><text class="detail-label">改成什么样才算完</text><text class="detail-copy">{{issue.acceptance}}</text></view>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="no-issues wide-rail"><text class="no-issues-mark">✓</text><view><text class="no-issues-title serif">行，这份真挑不出硬伤</text><text class="no-issues-copy">别得意，只是该有的东西你都写明白了。到此为止，别手欠再塞废话。</text></view></view>
+    </view>
+
+    <view class="slice-end"><text class="slice-end-label">LIVE VERDICT / {{quality.label}}</text><view class="slice-end-title serif"><text wx:for="{{quality.closingTitle}}" wx:key="*this">{{item}}</text></view><text class="slice-end-note">{{quality.closingNote}}</text></view>
+    <view class="share-dare"><text class="share-dare-label">FACE THE TYRANT</text><view class="share-dare-title serif"><text>不能只骂你一个，</text><text>拉个人来陪着。</text></view><text class="share-dare-note">生成一张只展示{{role.name}}的邀请图，不带你的报告、分数或材料。</text><button class="share-button" hover-class="press-hard" bindtap="generateRolePoster" disabled="{{sharePosterGenerating}}"><text>{{sharePosterGenerating ? '正在制作邀请图…' : '生成暴君邀请图'}}</text><text class="button-arrow">↗</text></button></view>
+    <view class="report-actions"><button class="secondary-button" hover-class="press-flat" bindtap="reviewAnother"><text>再审一份新材料</text><text class="button-arrow">→</text></button><button class="report-home-button" hover-class="press-dim" bindtap="goHome"><text>换一个暴君</text><text>↖</text></button></view>
+  </view>
+</view>
+
+<view wx:else class="page-shell"></view>
+
+<view wx:if="{{sharePosterVisible}}" class="share-poster-overlay" catchtouchmove="preventPosterScroll">
+  <view class="share-poster-dialog">
+    <view class="share-poster-head">
+      <view><text class="share-poster-kicker">TYRANT PROFILE / READY</text><text class="share-poster-title serif">{{role.name}}已装进海报</text></view>
+      <button class="share-poster-close" bindtap="closeSharePoster">×</button>
+    </view>
+    <view class="share-poster-preview-shell">
+      <image class="share-poster-preview" src="{{sharePosterPath}}" mode="aspectFit" />
+    </view>
+    <text class="share-poster-tip">先保存图片，再从相册发到朋友圈。好友长按小程序码会直接进入{{role.name}}的详情页。</text>
+    <button class="share-poster-save" hover-class="press-hard" bindtap="saveSharePoster"><text>保存到相册</text><text class="button-arrow">↓</text></button>
+  </view>
+</view>
+
+<canvas type="2d" id="reportSharePosterCanvas" class="share-poster-canvas"></canvas>

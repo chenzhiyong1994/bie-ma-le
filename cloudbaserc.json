@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.cloudbase.net/cli/cloudbaserc.schema.json",
+  "envId": "your-cloudbase-env-id",
+  "functionRoot": "dist/cloudfunctions",
+  "functions": [
+    {
+      "name": "bml-api-v2",
+      "dir": "bml-api-v2",
+      "type": "Event",
+      "handler": "index.main",
+      "timeout": 120,
+      "runtime": "Nodejs20.19",
+      "memorySize": 512,
+      "installDependency": true,
+      "envVariables": {
+        "CLOUDBASE_AI_MODEL": "hy3",
+        "CLOUDBASE_AI_PROVIDER": "cloudbase"
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "bie-ma-le",
+  "version": "1.0.0",
+  "private": true,
+  "description": "基于证据、修改建议与验收标准的 AI 材料评审微信小程序",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build:cloud": "node scripts/build-cloud-function.js",
+    "dev:api": "node --env-file=.env services/api/src/server.js",
+    "check:miniprogram": "node scripts/validate-miniprogram.js",
+    "check:provider": "node --env-file=.env scripts/check-ai-provider.js",
+    "smoke:review": "node --env-file=.env scripts/smoke-real-review.js",
+    "test:api": "node --test packages/ai-core/test/*.test.js services/api/test/*.test.js",
+    "check": "npm run build:cloud && npm run check:miniprogram && npm run test:api"
+  },
+  "dependencies": {
+    "@cloudbase/node-sdk": "^3.18.3",
+    "@cloudbase/signature-nodejs": "^2.2.0",
+    "busboy": "^1.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "mammoth": "^1.12.0",
+    "unpdf": "1.6.2",
+    "ws": "^8.21.1",
+    "wx-server-sdk": "4.0.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.6"
+  }
+}
